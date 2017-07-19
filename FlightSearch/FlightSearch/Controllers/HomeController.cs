@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FlightSearch.Helpers;
-using CsvHelper = FlightSearch.Helpers.CsvLoader;
+using FlightSearch.ViewModels;
 
 namespace FlightSearch.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(HomeViewModel homeViewModel)
         {
 
             // use csv loader to get airports and flights.
@@ -29,7 +29,7 @@ namespace FlightSearch.Controllers
 
             var earlyFlights = SortingHelper.SortFlightsByDepartureTimeEarlyToLate(flights);
             var lateFlights = SortingHelper.SortFlightsByDepartureTimeLateToEarly(flights);
-            return View();
+            return View(homeViewModel);
         }
 
         public ActionResult About()

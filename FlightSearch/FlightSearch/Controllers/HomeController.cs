@@ -12,6 +12,11 @@ namespace FlightSearch.Controllers
     {
         public ActionResult Index()
         {
+
+            // use csv loader to get airports and flights.
+            // put these in a viewmodel
+            // return View(viewmodel)
+            // then in view, can use viewmodel.airports and viewmodel.flights to populate elements.
             Helpers.CsvLoader csvHelper = new Helpers.CsvLoader();
             var airports = csvHelper.GetAirports();
             var flights = csvHelper.GetFlights();

@@ -17,16 +17,6 @@ namespace FlightSearch.Controllers
             var airports = csvHelper.GetAirports();
             var flights = csvHelper.GetFlights();
 
-            /*var filteredFlights = SortingHelper.FilterFlightsByAirportPair("SEA", "LAX", flights);
-            var cheapFlights = SortingHelper.SortFlightsByMainCabinPriceLowToHigh(flights);
-            var expensiveFlights = SortingHelper.SortFlightsByMainCabinPriceHighToLow(flights);
-            var cheapFirstClassFlights = SortingHelper.SortFlightsByFirstClassPriceLowToHigh(flights);
-            var expensiveFirstClassFlights = SortingHelper.SortFlightsByFirstClassPriceHighToLow(flights);
-
-            var earlyFlights = SortingHelper.SortFlightsByDepartureTimeEarlyToLate(flights);
-            var lateFlights = SortingHelper.SortFlightsByDepartureTimeLateToEarly(flights);*/
-
-            // TODO: change viewmodel to have two selected airports and an ienumerable of flights
             // add another dropdown for other airport.
             // add a list to display filtered flights.
             homeViewModel.Airports = GetSelectListItemsAirports(airports);

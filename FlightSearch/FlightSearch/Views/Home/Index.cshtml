@@ -1,40 +1,38 @@
-﻿@model FlightSearch.ViewModels.HomeViewModel
+﻿@using FlightSearch.Models
+@using FlightSearch.ViewModels
+@model FlightSearch.ViewModels.HomeViewModel
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Select Flights";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div>
-@*    @Html.DropDownListFor(x => x.Location, Model.LocationsList, "Pick a location", new { @id = "ddlLocations", @class = "selectpicker", style = "width=120px" })*@
-    @*@Html.DropDownListFor(a => a.Code, new SelectList(Airports, "Code", "Name"), "Pick an airport", new { @id = "ddlAirports", @class = "selectpicker", style = "width=120px" })*@
-    @*<%= Html.DropDownListFor(n => n.MyColorId, new SelectList(Colors, "ColorId", "Name")) %>*@
-    @Html.DropDownListFor(a => a.SelectedAirport, Model.Airports, "Pick an airport", new { @id = "ddlAirports", @class = "selectpicker", style = "width=120px" })
+    <h1>NotUnited Airlines</h1>
+    <p class="lead">Our main feature is that we're not them!</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <h2>Select Departure Airport</h2>
+        <div>
+            @Html.DropDownListFor(a => a.SelectedDepartureAirport, Model.Airports, "Pick Departure Airport", new { @id = "ddlDepartureAirports", @class = "selectpicker", style = "width=120px" })
+        </div>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Select Arrival Airport</h2>
+        <div>
+            @Html.DropDownListFor(a => a.SelectedArrivalAirport, Model.Airports, "Pick Arrival Airport", new { @id = "ddlArrivalAirports", @class = "selectpicker", style = "width=120px" })
+        </div>
     </div>
 </div>
+
+<table>
+    @foreach (Flight flight in Model.Flights)
+    {
+        <tr>
+            <td>@flight.FlightNumber</td>
+            <td>@flight.DepartureAirportCode</td>
+            <td>@flight.ArrivalAirportCode</td>
+        </tr>
+    }
+</table>

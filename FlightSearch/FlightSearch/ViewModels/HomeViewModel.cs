@@ -11,6 +11,7 @@ namespace FlightSearch.ViewModels
     {
         public IEnumerable<SelectListItem> Airports;
         public List<Flight> Flights;
-        public Airport SelectedAirport;
+        public Airport SelectedDepartureAirport;
+        public Airport SelectedArrivalAirport;
     }
 }

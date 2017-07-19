@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CsvHelper = FlightSearch.Helpers.CsvLoader;
 
 namespace FlightSearch.Controllers
 {
@@ -10,6 +11,9 @@ namespace FlightSearch.Controllers
     {
         public ActionResult Index()
         {
+            Helpers.CsvLoader csvHelper = new Helpers.CsvLoader();
+            var airports = csvHelper.GetAirports();
+            var flights = csvHelper.GetFlights();
             return View();
         }
 

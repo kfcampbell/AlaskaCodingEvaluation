@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FlightSearch.Helpers;
 using CsvHelper = FlightSearch.Helpers.CsvLoader;
 
 namespace FlightSearch.Controllers
@@ -14,6 +15,15 @@ namespace FlightSearch.Controllers
             Helpers.CsvLoader csvHelper = new Helpers.CsvLoader();
             var airports = csvHelper.GetAirports();
             var flights = csvHelper.GetFlights();
+
+            var filteredFlights = SortingHelper.FilterFlightsByAirportPair("SEA", "LAX", flights);
+            var cheapFlights = SortingHelper.SortFlightsByMainCabinPriceLowToHigh(flights);
+            var expensiveFlights = SortingHelper.SortFlightsByMainCabinPriceHighToLow(flights);
+            var cheapFirstClassFlights = SortingHelper.SortFlightsByFirstClassPriceLowToHigh(flights);
+            var expensiveFirstClassFlights = SortingHelper.SortFlightsByFirstClassPriceHighToLow(flights);
+
+            var earlyFlights = SortingHelper.SortFlightsByDepartureTimeEarlyToLate(flights);
+            var lateFlights = SortingHelper.SortFlightsByDepartureTimeLateToEarly(flights);
             return View();
         }
 

@@ -15,7 +15,7 @@
     <div class="col-md-4">
         <h2>Select Departure Airport</h2>
         <div>
-            @Html.DropDownListFor(a => a.SelectedDepartureAirport, Model.Airports, "Pick Departure Airport", new { @id = "ddlDepartureAirports", @class = "selectpicker", style = "width=120px" })
+            @Html.DropDownListFor(a => a.SelectedDepartureAirport, Model.Airports, "Pick Departure Airport", new { @id = "ddlDepartureAirports", @class = "selectpicker", style = "width=120px", onchange="getFilteredFlights()" })
         </div>
     </div>
     <div class="col-md-4">
@@ -26,19 +26,14 @@
     </div>
     <div class="col-md-4">
         <h2>Select Sorting Options</h2>
-        <select id="sortingDropdown">
+        <select id="sortingDropdown" onchange="getFilteredFlights()">
             <option value="0">Main Cabin: Price Low To High</option>
             <option value="1">Main Cabin: Price High To Low</option>
             <option value="2">First Class: Price Low To High</option>
-            <option value="3">First Class: Price High To Low</option>
+            <option value="3">First Class: Price High To Low</>
             <option value="4">Departure Time: Early To Late</option>
             <option value="5">Departure Time: Late To Early</option>
         </select>
-    </div>
-    <div>
-        <button class="btn btn-default" onclick="getFilteredFlights()">
-            <p>Search for Flights</p>
-        </button>
     </div>
 </div>
 

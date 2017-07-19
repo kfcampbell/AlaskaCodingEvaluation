@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FlightSearch.Enums;
 using FlightSearch.Helpers;
 using FlightSearch.Models;
 using FlightSearch.ViewModels;
 
 namespace FlightSearch.Controllers
 {
-    enum SortBy
-    {
-        MainCabinLowToHigh,
-        MainCabinHighToLow,
-        FirstClassLowToHigh,
-        FirstClassHighToLow,
-        DepartureEarlyToLate,
-        DepartureLateToEarly
-    }
     public class HomeController : Controller
     {
         private readonly CsvLoader _csvHelper = new CsvLoader();
@@ -46,14 +38,35 @@ namespace FlightSearch.Controllers
             SortBy sortingOrder = (SortBy)sortBy;
             var initialFlights = _csvHelper.GetFlights();
             var filteredFlights = SortingHelper.FilterFlightsByAirportPair(departureAirportCode, arrivalAirportCode, initialFlights);
+            var sortedFlights = filteredFlights;
+
+            switch (sortingOrder)
+            {
+                case SortBy.DepartureEarlyToLate:
+                    sortedFlights = SortingHelper.SortFlightsByDepartureTimeEarlyToLate(filteredFlights);
+                    break;
+                case SortBy.DepartureLateToEarly:
+                    sortedFlights = SortingHelper.SortFlightsByDepartureTimeLateToEarly(filteredFlights);
+                    break;
+                case SortBy.MainCabinLowToHigh:
+                    sortedFlights = SortingHelper.SortFlightsByMainCabinPriceLowToHigh(filteredFlights);
+                    break;
+                case SortBy.MainCabinHighToLow:
+                    sortedFlights = SortingHelper.SortFlightsByMainCabinPriceHighToLow(filteredFlights);
+                    break;
+                case SortBy.FirstClassLowToHigh:
+                    sortedFlights = SortingHelper.SortFlightsByFirstClassPriceLowToHigh(filteredFlights);
+                    break;
+                case SortBy.FirstClassHighToLow:
+                    sortedFlights = SortingHelper.SortFlightsByFirstClassPriceHighToLow(filteredFlights);
+                    break;
+            }
 
             // TODO:
-            // move enum class to separate file/folder
-            // add switch statement here for sorting
-            // in view, add onchange to each dropdown (including sort order dropdown)
             // then populate table based on results of json
+            // show message if flights are blank
 
-            return Json(new { success = true, flights = filteredFlights });
+            return Json(new { success = true, flights = sortedFlights });
         }
 
         public ActionResult About()

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using FlightSearch.Models;
 
 namespace FlightSearch.ViewModels
 {
     public class HomeViewModel
     {
-        public List<Airport> Airports;
+        public IEnumerable<SelectListItem> Airports;
         public List<Flight> Flights;
+        public Airport SelectedAirport;
     }
 }

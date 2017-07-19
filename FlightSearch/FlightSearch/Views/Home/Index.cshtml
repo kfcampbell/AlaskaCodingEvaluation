@@ -10,6 +10,13 @@
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
+<div>
+@*    @Html.DropDownListFor(x => x.Location, Model.LocationsList, "Pick a location", new { @id = "ddlLocations", @class = "selectpicker", style = "width=120px" })*@
+    @*@Html.DropDownListFor(a => a.Code, new SelectList(Airports, "Code", "Name"), "Pick an airport", new { @id = "ddlAirports", @class = "selectpicker", style = "width=120px" })*@
+    @*<%= Html.DropDownListFor(n => n.MyColorId, new SelectList(Colors, "ColorId", "Name")) %>*@
+    @Html.DropDownListFor(a => a.SelectedAirport, Model.Airports, "Pick an airport", new { @id = "ddlAirports", @class = "selectpicker", style = "width=120px" })
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>

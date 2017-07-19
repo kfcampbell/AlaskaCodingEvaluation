@@ -13,10 +13,6 @@ namespace FlightSearch.Controllers
     {
         public ActionResult Index(HomeViewModel homeViewModel)
         {
-            // use csv loader to get airports and flights.
-            // put these in a viewmodel
-            // return View(viewmodel)
-            // then in view, can use viewmodel.airports and viewmodel.flights to populate elements.
             Helpers.CsvLoader csvHelper = new Helpers.CsvLoader();
             var airports = csvHelper.GetAirports();
             var flights = csvHelper.GetFlights();
@@ -30,6 +26,9 @@ namespace FlightSearch.Controllers
             var earlyFlights = SortingHelper.SortFlightsByDepartureTimeEarlyToLate(flights);
             var lateFlights = SortingHelper.SortFlightsByDepartureTimeLateToEarly(flights);*/
 
+            // TODO: change viewmodel to have two selected airports and an ienumerable of flights
+            // add another dropdown for other airport.
+            // add a list to display filtered flights.
             homeViewModel.Airports = GetSelectListItemsAirports(airports);
             homeViewModel.Flights = flights;
             return View(homeViewModel);

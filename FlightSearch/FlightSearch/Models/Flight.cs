@@ -11,8 +11,8 @@ namespace FlightSearch.Models
         public string DepartureAirportCode { get; set; }
         public string ArrivalAirportCode { get; set; }
         public int FlightNumber { get; set; }
-        public DateTime ScheduledDepartureTime { get; set; }
-        public DateTime ScheduledArrivalTime { get; set; }
+        public string ScheduledDepartureTime { get; set; }
+        public string ScheduledArrivalTime { get; set; }
         public double MainCabinPrice { get; set; }
         public double FirstClassPrice { get; set; }
 

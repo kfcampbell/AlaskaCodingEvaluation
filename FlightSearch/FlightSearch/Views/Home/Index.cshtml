@@ -37,15 +37,11 @@
     </div>
 </div>
 
+<div id="errorMessage">
+    <h1>Select valid airport parameters to view flights.</h1>
+</div>
+
 <table id="displayedFlights">
-    @foreach (Flight flight in Model.Flights)
-    {
-        <tr>
-            <td>@flight.FlightNumber</td>
-            <td>@flight.DepartureAirportCode</td>
-            <td>@flight.ArrivalAirportCode</td>
-        </tr>
-    }
 </table>
 
 <script>

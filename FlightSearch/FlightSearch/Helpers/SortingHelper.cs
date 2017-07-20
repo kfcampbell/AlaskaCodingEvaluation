@@ -37,12 +37,12 @@ namespace FlightSearch.Helpers
 
         public static List<Flight> SortFlightsByDepartureTimeEarlyToLate(List<Flight> flights)
         {
-            return flights.OrderBy(f => f.ScheduledDepartureTime).ToList();
+            return flights.OrderBy(f => Convert.ToDateTime(f.ScheduledDepartureTime)).ToList();
         }
 
         public static List<Flight> SortFlightsByDepartureTimeLateToEarly(List<Flight> flights)
         {
-            return flights.OrderByDescending(f => f.ScheduledDepartureTime).ToList();
+            return flights.OrderByDescending(f => Convert.ToDateTime(f.ScheduledDepartureTime)).ToList();
         }
     }
 }

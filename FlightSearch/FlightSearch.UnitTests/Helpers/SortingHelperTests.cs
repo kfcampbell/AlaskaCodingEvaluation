@@ -44,5 +44,29 @@ namespace FlightSearch.UnitTests.Helpers
             filteredFlights.ShouldNotContain(thirdFlight);
         }
 
+        [Test]
+        public void SortFlightsByDepartureTimeEarlyToLate_ReverseOrderedFlights_ReturnsSortedFlights()
+        {
+            // Arrange
+            var firstFlight = new Flight
+            {
+                 ScheduledDepartureTime = "6:00 PM"
+            };
+            var secondFlight = new Flight
+            {
+                 ScheduledDepartureTime = "9:00 AM"
+            };
+            var initialFlights = new List<Flight> {firstFlight, secondFlight};
+
+            var sortingHelper = new SortingHelper();
+
+            // Act
+            var sortedFlights = sortingHelper.SortFlightsByDepartureTimeEarlyToLate(initialFlights);
+            initialFlights.Reverse();
+
+            // Assert
+            sortedFlights.ShouldBe(initialFlights);
+        }
+
     }
 }

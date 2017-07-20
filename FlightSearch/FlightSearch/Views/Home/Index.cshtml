@@ -8,20 +8,20 @@
 
 <div class="jumbotron">
     <h1>NotUnited Airlines</h1>
-    <p class="lead">Our main feature is that we're not them!</p>
+    <p class="lead">Fly us because we're not them!</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>Select Departure Airport</h2>
         <div>
-            @Html.DropDownListFor(a => a.SelectedDepartureAirport, Model.Airports, "Pick Departure Airport", new { @id = "ddlDepartureAirports", @class = "selectpicker", style = "width=120px", onchange="getFilteredFlights()" })
+            @Html.DropDownListFor(a => a.SelectedDepartureAirport, Model.Airports, "Pick Departure Airport", new { @id = "ddlDepartureAirports", style = "width=120px", onchange="getFilteredFlights()" })
         </div>
     </div>
     <div class="col-md-4">
         <h2>Select Arrival Airport</h2>
         <div>
-            @Html.DropDownListFor(a => a.SelectedArrivalAirport, Model.Airports, "Pick Arrival Airport", new { @id = "ddlArrivalAirports", @class = "selectpicker", style = "width=120px", onchange="getFilteredFlights()" })
+            @Html.DropDownListFor(a => a.SelectedArrivalAirport, Model.Airports, "Pick Arrival Airport", new { @id = "ddlArrivalAirports", style = "width=120px", onchange="getFilteredFlights()" })
         </div>
     </div>
     <div class="col-md-4">

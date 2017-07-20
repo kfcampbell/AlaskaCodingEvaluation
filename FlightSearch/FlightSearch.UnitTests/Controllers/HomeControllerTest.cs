@@ -6,23 +6,33 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FlightSearch;
 using FlightSearch.Controllers;
+using FlightSearch.Helpers;
+using FlightSearch.Models;
+using FlightSearch.ViewModels;
+using Moq;
+using Shouldly;
+using NUnit;
+using NUnit.Framework;
 
 namespace FlightSearch.UnitTests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void Index()
+        [Test]
+        public void Index_ValidParameters_ReturnsNotNull()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var csvMock = new Mock<ICsvLoader>();
+            csvMock.Setup(a => a.GetAirports()).Returns(new List<Airport>());
+            var filterMock = new Mock<IFilterHelper>();
+            HomeController controller = new HomeController(filterMock.Object, csvMock.Object);
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.Index(new HomeViewModel()) as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            result.ShouldNotBeNull();
         }
     }
 }

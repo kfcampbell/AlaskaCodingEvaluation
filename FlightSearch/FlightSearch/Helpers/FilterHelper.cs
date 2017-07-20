@@ -7,39 +7,40 @@ using FlightSearch.Models;
 
 namespace FlightSearch.Helpers
 {
-    public class FilterHelper
+    public class FilterHelper : IFilterHelper
     {
-        public FilterHelper()
+        private readonly ISortingHelper _sortingHelper;
+        public FilterHelper(ISortingHelper sortingHelper)
         {
-
+            _sortingHelper = sortingHelper;
         }
 
         public List<Flight> GetFilteredFlights(string departureAirportCode, string arrivalAirportCode, int sortBy, List<Flight> initialFlights)
         {
             SortBy sortingOrder = (SortBy) sortBy;
-            var filteredFlights = SortingHelper.FilterFlightsByAirportPair(departureAirportCode, arrivalAirportCode,
+            var filteredFlights = _sortingHelper.FilterFlightsByAirportPair(departureAirportCode, arrivalAirportCode,
                 initialFlights);
             var sortedFlights = filteredFlights;
 
             switch (sortingOrder)
             {
                 case SortBy.DepartureEarlyToLate:
-                    sortedFlights = SortingHelper.SortFlightsByDepartureTimeEarlyToLate(filteredFlights);
+                    sortedFlights = _sortingHelper.SortFlightsByDepartureTimeEarlyToLate(filteredFlights);
                     break;
                 case SortBy.DepartureLateToEarly:
-                    sortedFlights = SortingHelper.SortFlightsByDepartureTimeLateToEarly(filteredFlights);
+                    sortedFlights = _sortingHelper.SortFlightsByDepartureTimeLateToEarly(filteredFlights);
                     break;
                 case SortBy.MainCabinLowToHigh:
-                    sortedFlights = SortingHelper.SortFlightsByMainCabinPriceLowToHigh(filteredFlights);
+                    sortedFlights = _sortingHelper.SortFlightsByMainCabinPriceLowToHigh(filteredFlights);
                     break;
                 case SortBy.MainCabinHighToLow:
-                    sortedFlights = SortingHelper.SortFlightsByMainCabinPriceHighToLow(filteredFlights);
+                    sortedFlights = _sortingHelper.SortFlightsByMainCabinPriceHighToLow(filteredFlights);
                     break;
                 case SortBy.FirstClassLowToHigh:
-                    sortedFlights = SortingHelper.SortFlightsByFirstClassPriceLowToHigh(filteredFlights);
+                    sortedFlights = _sortingHelper.SortFlightsByFirstClassPriceLowToHigh(filteredFlights);
                     break;
                 case SortBy.FirstClassHighToLow:
-                    sortedFlights = SortingHelper.SortFlightsByFirstClassPriceHighToLow(filteredFlights);
+                    sortedFlights =_sortingHelper.SortFlightsByFirstClassPriceHighToLow(filteredFlights);
                     break;
             }
 

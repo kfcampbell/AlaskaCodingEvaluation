@@ -10,16 +10,10 @@ using FlightSearch.Models;
 
 namespace FlightSearch.Helpers
 {
-    public class CsvLoader
+    public class CsvLoader : ICsvLoader
     {
-        private CsvReader _csvReader;
-        private TextReader _textReader;
         private readonly string _airportsPath = ConfigurationManager.AppSettings["AirportsFilePath"];
-        private string _flightsPath = ConfigurationManager.AppSettings["FlightsFilePath"];
-
-        public CsvLoader()
-        {
-        }
+        private readonly string _flightsPath = ConfigurationManager.AppSettings["FlightsFilePath"];
 
         public List<Airport> GetAirports()
         {

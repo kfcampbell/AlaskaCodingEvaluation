@@ -12,12 +12,18 @@ namespace FlightSearch.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly CsvLoader _csvHelper = new CsvLoader();
-        private readonly FilterHelper _filterHelper = new FilterHelper();
+        private readonly ICsvLoader _csvLoader;
+        private readonly IFilterHelper _filterHelper;
+
+        public HomeController(IFilterHelper filterHelper, ICsvLoader csvLoader)
+        {
+            _filterHelper = filterHelper;
+            _csvLoader = csvLoader;
+        }
 
         public ActionResult Index(HomeViewModel homeViewModel)
         {
-            var airports = _csvHelper.GetAirports();
+            var airports = _csvLoader.GetAirports();
             homeViewModel.Airports = GetSelectListItemsAirports(airports);
             return View(homeViewModel);
         }
@@ -32,7 +38,7 @@ namespace FlightSearch.Controllers
 
         public ActionResult GetFilteredFlights(string departureAirportCode, string arrivalAirportCode, int sortBy)
         {
-            var initialFlights = _csvHelper.GetFlights();
+            var initialFlights = _csvLoader.GetFlights();
             var sortedFlights = _filterHelper.GetFilteredFlights(departureAirportCode, arrivalAirportCode, sortBy,
                 initialFlights);
 
